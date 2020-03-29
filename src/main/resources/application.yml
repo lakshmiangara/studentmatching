@@ -1,0 +1,8 @@
+spring:
+  data:
+    cassandra:
+      keyspace-name: studentmatching
+      contact-points: localhost
+      port: 9042
+      schema-action: none
+
