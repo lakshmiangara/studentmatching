@@ -1,13 +1,13 @@
 create table studentmatching.studentinterests
 (
-    projectid       int,
-    studentid       text,
-    studentSkills   text,
-    firtName        text,
-    lastName        text,
-    dayOfWeek       text,
-    timeOfDay       text,
-    mode            text,
-    createDate      timestamp,
-    PRIMARY KEY     (projectid, studentid, studentSkills)
+    projectid     int,
+    studentid     text,
+    createdate    timestamp,
+    dayofweek     text,
+    firtname      text,
+    lastname      text,
+    mode          text,
+    studentpref   int,
+    studentskills text,
+    primary key (projectid, studentid)
 )
