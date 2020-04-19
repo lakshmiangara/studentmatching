@@ -41,6 +41,7 @@ public class StudentSelection {
         projectRepository.findAll().forEach(p -> projectsList.add(p));
         return projectsList;
     }
+
     //POST method
     @RequestMapping(method = RequestMethod.POST, value = "/list/studentinterest", produces = MediaType.APPLICATION_JSON_VALUE)
     public String postStudentInterest(@RequestBody StudentInterest studentInterest) {
@@ -77,7 +78,7 @@ public class StudentSelection {
         return status;
     }
 
-    //matching algorithm
+    //GET
     @RequestMapping(method = RequestMethod.GET, value="/list/studentMatching")
     public Map<Integer, Set<StudentPreferences>> getStudentMatching(@RequestParam(required = false) Integer projectId) {
         List<com.usf.studentmatching.model.StudentInterest> stInterest = new ArrayList<>();
