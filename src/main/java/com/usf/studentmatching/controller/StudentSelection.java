@@ -79,6 +79,13 @@ public class StudentSelection {
     }
 
     //GET
+
+    /**
+     *
+     * @param projectId is optional. If project is provided only for that project we do compatible team else for all
+     *                  projects in database we build compatible teams.
+     * @return Map with projectid and Set of students who are compatible for the project.
+     */
     @RequestMapping(method = RequestMethod.GET, value="/list/studentMatching")
     public Map<Integer, Set<StudentPreferences>> getStudentMatching(@RequestParam(required = false) Integer projectId) {
         List<com.usf.studentmatching.model.StudentInterest> stInterest = new ArrayList<>();
