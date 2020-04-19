@@ -13,10 +13,10 @@ import org.slf4j.LoggerFactory;
 @Order(2)
 public class RequestResponseFilter implements Filter {
 
-    private final static Logger LOG = LoggerFactory.getLogger(RequestResponseFilter.class);
+    private final static Logger log = LoggerFactory.getLogger(RequestResponseFilter.class);
     @Override
     public void init(final FilterConfig filterConfig) throws ServletException {
-        LOG.info("Initializing filter :{}", this);
+        log.info("Initializing filter :{}", this);
     }
 
     @Override
@@ -27,13 +27,13 @@ public class RequestResponseFilter implements Filter {
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-        LOG.info("Logging Request  {} : {}", req.getMethod(), req.getRequestURI());
+        log.info("Logging Request  {} : {}", req.getMethod(), req.getRequestURI());
         chain.doFilter(request, response);
-        LOG.info("Logging Response :{}", res.getContentType());
+        log.info("Logging Response :{}", res.getContentType());
     }
 
     @Override
     public void destroy() {
-        LOG.warn("Destructing filter :{}", this);
+        log.warn("Destructing filter :{}", this);
     }
 }
