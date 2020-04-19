@@ -17,15 +17,12 @@ public class MatchingAlgorithm {
     public static
     void matchPreferences(Map<Integer, Set<StudentPreferences>> studentPreferenceMap,
                                            List<StudentInterest> stInterest, Project project) {
-        int numOfStudents = stInterest.size();
 
         List<StudentPreferences> studentPreferencesList = new ArrayList<>();
         stInterest.forEach(
                 st -> {
                     if (st.getStudentInterestPrimaryKey().getProjectId() != project.getProjectid())
                         return;
-                    //StudentPreferences studentPreferences = getStudentPoints(project, st);
-                    //studentPreferencesList.add(studentPreferences);
                     studentPreferencesList.add(getStudentPoints(project, st));
                 }
         );
@@ -69,7 +66,7 @@ public class MatchingAlgorithm {
     }
 
     private static Set<StudentPreferences>  formCompatableTeams(Project project, List<StudentPreferences> stPreferences) {
-        CopyOnWriteArrayList<String> projSkillList = new CopyOnWriteArrayList<>();
+        List<String> projSkillList = new CopyOnWriteArrayList<>();
         List<StudentPreferences> studentPreferences = getWeekOfDay(project, stPreferences);
         String[] prSkills = project.getProjectskills().toUpperCase().split(",");
         for (String skill : prSkills) {
@@ -77,7 +74,7 @@ public class MatchingAlgorithm {
         }
         Set<StudentPreferences> finalGroupStudentsWithSameDay = new LinkedHashSet<>();
         Map<String, Set<StudentPreferences>> stringSetMap = new ConcurrentHashMap<>();
-        int maxReq = project.getMax();
+
         for (StudentPreferences st: studentPreferences) {
             String[] stSkills = st.getSkills().toUpperCase().split(",");
             for (String skill: stSkills) {
