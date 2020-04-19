@@ -13,6 +13,7 @@ public class StudentPreferences implements Comparable<StudentPreferences> {
     private WeekDay[] weekDay;
     private String mode;
     private String skills;
+    private boolean ignore;
     private int totalPoints;
 
 
