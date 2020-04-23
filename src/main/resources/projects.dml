@@ -1,0 +1,20 @@
+INSERT INTO studentmatching.projects(projectid, max, min, projectname, projectskills)
+VALUES (1000,4,3,'financial accounting system','Programming, Human-Computer Interfaces');
+
+INSERT INTO studentmatching.projects(projectid, max, min, projectname, projectskills)
+VALUES (1001,4,3,'student matching','Programming, Human-Computer Interfaces');
+
+INSERT INTO studentmatching.projects(projectid, max, min, projectname, projectskills)
+VALUES (1002,4,3,'Mesh network sensor array','Network, Programming, Human-Computer Interfaces');
+
+INSERT INTO studentmatching.projects(projectid, max, min, projectname, projectskills)
+VALUES (1003,4,3,'redundant network','Networking');
+
+INSERT INTO studentmatching.projects(projectid, max, min, projectname, projectskills)
+VALUES (1004,4,3,'Disaster Management','Human-computer Interaction, Programming, Web Systems');
+
+INSERT INTO studentmatching.projects(projectid, max, min, projectname, projectskills)
+VALUES (1005,4,3,'Electronic Medical Record system','Networking, Information Assurance & Security, Software Development');
+
+INSERT INTO studentmatching.projects(projectid, max, min, projectname, projectskills)
+VALUES (1006,4,3,'redundant databases','Programming, IT Fundamentals');
