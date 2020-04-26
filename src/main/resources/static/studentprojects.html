@@ -133,7 +133,7 @@
         return resp;
     }
     var firstTime = true;
-    var skillObject = new Object();
+    var skillObject = new Array();
     var wkObject = []
 
     function saveStudent() {
@@ -144,92 +144,97 @@
         var projList = document.getElementsByClassName("projId");
         var prefList = document.getElementsByClassName("preference");
         var str = ""
+        let counter = 0;
         for (var i = 0; i < prefList.length; i++) {
             if (!!prefList[i].value) {
-                skillObject.firstName = fname;
-                skillObject.lastName = lname;
-                skillObject.mode = 'Async';
-                skillObject.preference = prefList[i].value;
-                skillObject.studentid = stid;
-                skillObject.projectid = parseInt(projList[i].value);
-            }
-            var chkList = document.getElementsByClassName(projList[i].value);
-            var skillList = document.getElementsByClassName(projList[i].value + i);
+                skillObject[counter] = new Object();
+                skillObject[counter].firstName = fname;
+                skillObject[counter].lastName = lname;
+                skillObject[counter].mode = 'Async';
+                skillObject[counter].preference = prefList[i].value;
+                skillObject[counter].studentid = stid;
+                skillObject[counter].projectid = parseInt(projList[i].value);
 
-            for (var j = 0, k = 0; j < chkList.length && skillList.length; j++, k++) {
+                var chkList = document.getElementsByClassName(projList[i].value);
+                var skillList = document.getElementsByClassName(projList[i].value + i);
+                str = "";
+                for (var j = 0, k = 0; j < chkList.length && skillList.length; j++, k++) {
                 // alert(prefList[i].value + projList[i].value +  chkList[j].checked + skillList[k].value)
-                if (chkList[j].checked) {
-                    str += skillList[k].value.trim() + ",";
+                    if (chkList[j].checked) {
+                        str += skillList[k].value.trim() + ",";
+                    }
                 }
-            }
+                skillObject[counter].studentskills = str.substr(0, str.length - 1);
+                if ($('#monm').is(":checked")) {
+                    wkObject.push({dayOfWeek: "MONDAY", timeOfDay: "Morning"});
+                }
+                if ($('#mona').is(":checked")) {
+                    wkObject.push({dayOfWeek: "MONDAY", timeOfDay: "Afternoon"});
+                }
+                if ($('#mone').is(":checked")) {
+                    wkObject.push({dayOfWeek: "MONDAY", timeOfDay: "Evening"});
+                }
+                if ($('#tuem').is(":checked")) {
+                    wkObject.push({dayOfWeek: "TUESDAY", timeOfDay: "Morning"});
+                }
+                if ($('#tuea').is(":checked")) {
+                    wkObject.push({dayOfWeek: "TUESDAY", timeOfDay: "Afternoon"});
+                }
+                if ($('#tuee').is(":checked")) {
+                    wkObject.push({dayOfWeek: "TUESDAY", timeOfDay: "Evening"});
+                }
+                if ($('#wedm').is(":checked")) {
+                    wkObject.push({dayOfWeek: "WEDNESDAY", timeOfDay: "Morning"});
+                }
+                if ($('#weda').is(":checked")) {
+                    wkObject.push({dayOfWeek: "WEDNESDAY", timeOfDay: "Afternoon"});
+                }
+                if ($('#wede').is(":checked")) {
+                    wkObject.push({dayOfWeek: "WEDNESDAY", timeOfDay: "Evening"});
+                }
+                if ($('#thum').is(":checked")) {
+                    wkObject.push({dayOfWeek: "THURSDAY", timeOfDay: "Morning"});
+                }
+                if ($('#thua').is(":checked")) {
+                    wkObject.push({dayOfWeek: "THURSDAY", timeOfDay: "Afternoon"});
+                }
+                if ($('#thue').is(":checked")) {
+                    wkObject.push({dayOfWeek: "THURSDAY", timeOfDay: "Evening"});
+                }
+                if ($('#frim').is(":checked")) {
+                    wkObject.push({dayOfWeek: "FRIDAY", timeOfDay: "Morning"});
+                }
+                if ($('#fria').is(":checked")) {
+                    wkObject.push({dayOfWeek: "FRIDAY", timeOfDay: "Afternoon"});
+                }
+                if ($('#frie').is(":checked")) {
+                    wkObject.push({dayOfWeek: "FRIDAY", timeOfDay: "Evening"});
+                }
+                if ($('#satm').is(":checked")) {
+                    wkObject.push({dayOfWeek: "SATURDAY", timeOfDay: "Morning"});
+                }
+                if ($('#sata').is(":checked")) {
+                    wkObject.push({dayOfWeek: "SATURDAY", timeOfDay: "Afternoon"});
+                }
+                if ($('#sate').is(":checked")) {
+                    wkObject.push({dayOfWeek: "SATURDAY", timeOfDay: "Evening"});
+                }
+                if ($('#sunm').is(":checked")) {
+                    wkObject.push({dayOfWeek: "SUNDAY", timeOfDay: "Morning"});
+                }
+                if ($('#suna').is(":checked")) {
+                    wkObject.push({dayOfWeek: "SUNDAY", timeOfDay: "Afternoon"});
+                }
+                if ($('#sune').is(":checked")) {
+                    wkObject.push({dayOfWeek: "SUNDAY", timeOfDay: "Evening"});
+                }
+                skillObject[counter].weekDay = wkObject;
+                counter += 1;
+                wkObject=[];
+                }
+        }
 
-        }
-        skillObject.studentskills = str.substr(0, str.length - 1);
 
-        if ($('#monm').is(":checked")) {
-            wkObject.push({dayOfWeek: "MONDAY", timeOfDay: "Morning"});
-        }
-        if ($('#mona').is(":checked")) {
-            wkObject.push({dayOfWeek: "MONDAY", timeOfDay: "Afternoon"});
-        }
-        if ($('#mone').is(":checked")) {
-            wkObject.push({dayOfWeek: "MONDAY", timeOfDay: "Evening"});
-        }
-        if ($('#tuem').is(":checked")) {
-            wkObject.push({dayOfWeek: "TUESDAY", timeOfDay: "Morning"});
-        }
-        if ($('#tuea').is(":checked")) {
-            wkObject.push({dayOfWeek: "TUESDAY", timeOfDay: "Afternoon"});
-        }
-        if ($('#tuee').is(":checked")) {
-            wkObject.push({dayOfWeek: "TUESDAY", timeOfDay: "Evening"});
-        }
-        if ($('#wedm').is(":checked")) {
-            wkObject.push({dayOfWeek: "WEDNESDAY", timeOfDay: "Morning"});
-        }
-        if ($('#weda').is(":checked")) {
-            wkObject.push({dayOfWeek: "WEDNESDAY", timeOfDay: "Afternoon"});
-        }
-        if ($('#wede').is(":checked")) {
-            wkObject.push({dayOfWeek: "WEDNESDAY", timeOfDay: "Evening"});
-        }
-        if ($('#thum').is(":checked")) {
-            wkObject.push({dayOfWeek: "THURSDAY", timeOfDay: "Morning"});
-        }
-        if ($('#thua').is(":checked")) {
-            wkObject.push({dayOfWeek: "THURSDAY", timeOfDay: "Afternoon"});
-        }
-        if ($('#thue').is(":checked")) {
-            wkObject.push({dayOfWeek: "THURSDAY", timeOfDay: "Evening"});
-        }
-        if ($('#frim').is(":checked")) {
-            wkObject.push({dayOfWeek: "FRIDAY", timeOfDay: "Morning"});
-        }
-        if ($('#fria').is(":checked")) {
-            wkObject.push({dayOfWeek: "FRIDAY", timeOfDay: "Afternoon"});
-        }
-        if ($('#frie').is(":checked")) {
-            wkObject.push({dayOfWeek: "FRIDAY", timeOfDay: "Evening"});
-        }
-        if ($('#satm').is(":checked")) {
-            wkObject.push({dayOfWeek: "SATURDAY", timeOfDay: "Morning"});
-        }
-        if ($('#sata').is(":checked")) {
-            wkObject.push({dayOfWeek: "SATURDAY", timeOfDay: "Afternoon"});
-        }
-        if ($('#sate').is(":checked")) {
-            wkObject.push({dayOfWeek: "SATURDAY", timeOfDay: "Evening"});
-        }
-        if ($('#sunm').is(":checked")) {
-            wkObject.push({dayOfWeek: "SUNDAY", timeOfDay: "Morning"});
-        }
-        if ($('#suna').is(":checked")) {
-            wkObject.push({dayOfWeek: "SUNDAY", timeOfDay: "Afternoon"});
-        }
-        if ($('#sune').is(":checked")) {
-            wkObject.push({dayOfWeek: "SUNDAY", timeOfDay: "Evening"});
-        }
-        skillObject.weekDay = wkObject;
         let data1 = JSON.stringify(skillObject);
 
 //        postData('http://localhost:8080/list/studentinterest', data1).then(
