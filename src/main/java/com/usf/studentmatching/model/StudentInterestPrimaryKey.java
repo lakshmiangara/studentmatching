@@ -10,6 +10,10 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 
 import java.io.Serializable;
 
+/**
+ * Purpose: This class defines the primary key for studentintersts table in cassandra database.
+ */
+
 @AllArgsConstructor
 @PrimaryKeyClass
 @Setter @Getter
