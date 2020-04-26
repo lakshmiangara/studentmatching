@@ -9,6 +9,11 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * The purpose of this class is to intrecept input and output responses coming in and going out of
+ * student matching application.
+ * Added this class purely for informational purpose.
+ */
 @Component
 @Order(2)
 public class RequestResponseFilter implements Filter {
