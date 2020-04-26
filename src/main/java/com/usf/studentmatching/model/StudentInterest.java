@@ -11,6 +11,10 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Purpose: This class model studentinterest table in cassandra database.
+ */
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter @Getter
@@ -26,7 +30,7 @@ public class StudentInterest {
     private @NonNull String mode;
     private  int studentpref;
 
-
+// This object mapper is a helper method to convert array of week objects.
     public WeekDay[] getDayOfWeek() {
         ObjectMapper mapper = new ObjectMapper();
         List st = null;
