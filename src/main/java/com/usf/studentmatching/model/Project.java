@@ -9,6 +9,10 @@ import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.io.Serializable;
 
+/**
+ * purpose: This class models the project table in cassandra database.
+ */
+
 @AllArgsConstructor
 @Setter @Getter
 @Table("projects")
