@@ -4,7 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.*;
 
-import java.time.DayOfWeek;
+/**
+ * This class is a mapper for student input requests mapped into this object.
+ *
+ */
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,6 +21,7 @@ public class StudentInterest {
     private String lastName;
     private String mode;
     private int preference;
+
 
 
     public String getWeekDay() {
