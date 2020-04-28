@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <title>Hello, world!</title>
+</head>
+<body>
+<div id="dyntbl" class="container">
+    <table id="tbl" class="table table-striped table-bordered" style="width:100%">
+        <caption style="caption-side: top;text-align:center">
+            <label>Student Matching Report</label>
+        </caption>
+        <tr>
+            <th>Student ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Week Choice</th>
+            <th>Preference</th>
+            <th>Skills</th>
+
+        </tr>
+    </table>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+
+    $(document).ready(function() {
+
+    //   $("button").click(function(){
+    // function getProjects() {
+    $.getJSON("list/studentMatching",
+    function (result) {
+        var tr = [];
+        Object.keys(result).forEach(key => {
+           let value = result[key]
+           if (value == null || value.length == 0) {
+               return
+
+           } else {
+               tr.push('<tr></tr><td bgcolor="#5f9ea0" colspan=6; align="center";>'+key+'</td></tr>');
+               let temp = "";
+               let flag = "Y";
+               Object.keys(value).forEach(key1 => {
+                   let value1 = value[key1]
+                   tr.push('<tr>');
+                   Object.keys(value1).forEach(key2 => {
+
+                       if (key2=="studentId") {
+
+                           tr.push('<td>' + value1[key2] + '</td>');
+                       }
+
+                       if (key2=="firstName") {
+                           tr.push('<td>' + value1[key2] + '</td>');
+                       }
+                       if (key2==="lastName") {
+                           tr.push('<td>' + value1[key2] + '</td>');
+                       }
+
+                       if (key2==="skills") {
+                           tr.push('<td>' + value1[key2] + '</td>');
+                       }
+                       if (key2==="totalPoints") {
+                           tr.push('<td>' + value1[key2] + '</td>');
+                       }
+
+                       if (key2==="weekDay") {
+                           tr.push('<td>')
+                           let value2 = value1[key2]
+                           let str=""
+                           Object.keys(value2).forEach(key3 => {
+                                let value3 = value2[key3]
+                                Object.keys(value3).forEach(key4 => {
+                                    str += value3[key4]
+                                    str += " "
+                                })
+                               str += ","
+                           });
+                           temp = str;
+                           tr.push(str.substr(0, str.length - 1));
+                           tr.push('</td>')
+                       }
+                       });
+                   tr.push('</tr>');
+               });
+
+           }
+        });
+
+        $('#tbl').append($(tr.join('')));
+
+        });
+    });
+
+</script>
+</html>
