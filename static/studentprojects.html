@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+    <title>Student Matching</title>
+</head>
+
+<header>
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Student Matching</a>
+        </div>
+        <div class="collapse navbar-collapse navbar-toggleable-xs"  id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="Login.html"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+            </ul>  
+        </div>
+	</div>
+</nav>
+</header>
+
+<body>
+<div class="container">
+    <h2>List of Projects</h2>
+</div>
+<div class="container">
+<table id="tbl" class="table table-striped table-bordered" style="width:100%">
+    <tr>
+        <th>Project ID</th>
+        <th>Project Name</th>
+        <th>Project Skills</th>
+        <th>Min</th>
+        <th>Max</th>
+    </tr>
+</table>
+</div>
+<hr>
+<div class="container">
+        <h2>Select Project Preferences</h2>
+</div>
+<div class="container">
+    <form class="form-horizontal" name="studentselection" action="">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Selection:</label>
+            <div class="col-sm-10">
+                <table id="tbl1" class="table table-striped table-bordered">
+                    <tr>
+                        <th>Project ID</th>
+                        <th>Project Preference</th>
+                        <th>Skills You have</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Timings:</label>
+            <div class="col-sm-10">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                            <th>Sun</th>
+                            <th>Timings</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><input type="checkbox"  id ="monm"></td>
+                            <td><input type="checkbox"  id ="tuem"></td>
+                            <td><input type="checkbox"  id ="wedm"></td>
+                            <td><input type="checkbox"  id ="thum"></td>
+                            <td><input type="checkbox"  id ="frim"></td>
+                            <td><input type="checkbox"  id ="satm"></td>
+                            <td><input type="checkbox"  id ="sunm"></td>
+                            <td><label class="control-label col-sm-2">Morning</label></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" id = "mona"></td>
+                            <td><input type="checkbox" id ="tuea"></td>
+                            <td><input type="checkbox" id ="weda"></td>
+                            <td><input type="checkbox" id ="thua"></td>
+                            <td><input type="checkbox" id ="fria"></td>
+                            <td><input type="checkbox" id ="sata"></td>
+                            <td><input type="checkbox" id ="suna"></td>
+                            <td><label class="control-label col-sm-2">Afternoon</label></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" id = "mone"></td>
+                            <td><input type="checkbox" id = "tuee"></td>
+                            <td><input type="checkbox" id = "wede"></td>
+                            <td><input type="checkbox" id = "thue"></td>
+                            <td><input type="checkbox" id = "frie"></td>
+                            <td><input type="checkbox" id = "sate"></td>
+                            <td><input type="checkbox" id = "sune"></td>
+                            <td><label class="control-label col-sm-2">Evening</label></td>
+                        </tr>
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+        <input type="text" id = "rsp" value = "" readonly value="">
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <!-- <button onclick="saveStudent()"  class="btn btn-default">Save Student Data</button> -->
+                <input type="button" class="btn btn-info" value="Submit" onclick="saveStudent()">
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+
+<script>
+    async function postData(url, data) {
+        let resp = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: data
+        });
+        return resp;
+    }
+    var firstTime = true;
+    var skillObject = new Object();
+    var wkObject = []
+
+    function saveStudent() {
+        //    $("button").click(function (e) {
+        var fname = localStorage.getItem("fn");
+        var lname = localStorage.getItem("ln");
+        var stid = localStorage.getItem("id");
+        var projList = document.getElementsByClassName("projId");
+        var prefList = document.getElementsByClassName("preference");
+        var str = ""
+        for (var i = 0; i < prefList.length; i++) {
+            if (!!prefList[i].value) {
+                skillObject.firstName = fname;
+                skillObject.lastName = lname;
+                skillObject.mode = 'Async';
+                skillObject.preference = prefList[i].value;
+                skillObject.studentid = stid;
+                skillObject.projectid = parseInt(projList[i].value);
+            }
+            var chkList = document.getElementsByClassName(projList[i].value);
+            var skillList = document.getElementsByClassName(projList[i].value + i);
+
+            for (var j = 0, k = 0; j < chkList.length && skillList.length; j++, k++) {
+                // alert(prefList[i].value + projList[i].value +  chkList[j].checked + skillList[k].value)
+                if (chkList[j].checked) {
+                    str += skillList[k].value.trim() + ",";
+                }
+            }
+
+        }
+        skillObject.studentskills = str.substr(0, str.length - 1);
+
+        if ($('#monm').is(":checked")) {
+            wkObject.push({dayOfWeek: "MONDAY", timeOfDay: "Morning"});
+        }
+        if ($('#mona').is(":checked")) {
+            wkObject.push({dayOfWeek: "MONDAY", timeOfDay: "Afternoon"});
+        }
+        if ($('#mone').is(":checked")) {
+            wkObject.push({dayOfWeek: "MONDAY", timeOfDay: "Evening"});
+        }
+        if ($('#tuem').is(":checked")) {
+            wkObject.push({dayOfWeek: "TUESDAY", timeOfDay: "Morning"});
+        }
+        if ($('#tuea').is(":checked")) {
+            wkObject.push({dayOfWeek: "TUESDAY", timeOfDay: "Afternoon"});
+        }
+        if ($('#tuee').is(":checked")) {
+            wkObject.push({dayOfWeek: "TUESDAY", timeOfDay: "Evening"});
+        }
+        if ($('#wedm').is(":checked")) {
+            wkObject.push({dayOfWeek: "WEDNESDAY", timeOfDay: "Morning"});
+        }
+        if ($('#weda').is(":checked")) {
+            wkObject.push({dayOfWeek: "WEDNESDAY", timeOfDay: "Afternoon"});
+        }
+        if ($('#wede').is(":checked")) {
+            wkObject.push({dayOfWeek: "WEDNESDAY", timeOfDay: "Evening"});
+        }
+        if ($('#thum').is(":checked")) {
+            wkObject.push({dayOfWeek: "THURSDAY", timeOfDay: "Morning"});
+        }
+        if ($('#thua').is(":checked")) {
+            wkObject.push({dayOfWeek: "THURSDAY", timeOfDay: "Afternoon"});
+        }
+        if ($('#thue').is(":checked")) {
+            wkObject.push({dayOfWeek: "THURSDAY", timeOfDay: "Evening"});
+        }
+        if ($('#frim').is(":checked")) {
+            wkObject.push({dayOfWeek: "FRIDAY", timeOfDay: "Morning"});
+        }
+        if ($('#fria').is(":checked")) {
+            wkObject.push({dayOfWeek: "FRIDAY", timeOfDay: "Afternoon"});
+        }
+        if ($('#frie').is(":checked")) {
+            wkObject.push({dayOfWeek: "FRIDAY", timeOfDay: "Evening"});
+        }
+        if ($('#satm').is(":checked")) {
+            wkObject.push({dayOfWeek: "SATURDAY", timeOfDay: "Morning"});
+        }
+        if ($('#sata').is(":checked")) {
+            wkObject.push({dayOfWeek: "SATURDAY", timeOfDay: "Afternoon"});
+        }
+        if ($('#sate').is(":checked")) {
+            wkObject.push({dayOfWeek: "SATURDAY", timeOfDay: "Evening"});
+        }
+        if ($('#sunm').is(":checked")) {
+            wkObject.push({dayOfWeek: "SUNDAY", timeOfDay: "Morning"});
+        }
+        if ($('#suna').is(":checked")) {
+            wkObject.push({dayOfWeek: "SUNDAY", timeOfDay: "Afternoon"});
+        }
+        if ($('#sune').is(":checked")) {
+            wkObject.push({dayOfWeek: "SUNDAY", timeOfDay: "Evening"});
+        }
+        skillObject.weekDay = wkObject;
+        let data1 = JSON.stringify(skillObject);
+
+//        postData('http://localhost:8080/list/studentinterest', data1).then(
+//            response => { $('body').find('#rsp').attr('value',response); } );
+
+        firstTime = false;
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", "/list/studentinterest", true);
+        xmlhttp.setRequestHeader('Content-Type', 'application/json');
+        xmlhttp.send( data1 );
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let response = xmlhttp.responseText;
+                $('body').find('#rsp').attr('value',response);
+            }
+        }
+        //   });
+    }
+
+    $(document).ready(function() {
+
+        //   $("button").click(function(){
+        // function getProjects() {
+            $.getJSON("/list/project",
+                function (result) {
+                    var tr = [];
+                    tr.allBuffers = ""
+                    for (var i = 0; i < result.length; i++) {
+                        tr.push('<tr>');
+                        tr.push('<td>' + result[i].projectid + '</td>');
+                        tr.push('<td>' + result[i].projectname + '</td>');
+                        tr.push('<td>' + result[i].projectskills + '</td>');
+                        tr.push('<td>' + result[i].min + '</td>');
+                        tr.push('<td>' + result[i].max + '</td>');
+                        tr.push('</tr>');
+                    }
+                    $('#tbl').append($(tr.join('')));
+                    var tr = [];
+                    tr.allBuffers = ""
+                    for (var i = 0; i < result.length; i++) {
+                        tr.push('<tr>');
+                        tr.push('<td>' + result[i].projectid + '</td>');
+                        tr.push('<td> <input type="text" class="preference" value=""/><input type="hidden" class="projId" value=" ' + result[i].projectid + '"/></td>');
+                        tr.push('<td>')
+                        var tmp = result[i].projectskills.split(",");
+                        for (var j = 0; j < tmp.length; j++) {
+                            tr.push('<input type="checkbox" class=" ' + result[i].projectid + '">');
+                            tr.push('&nbsp;<label class="custom-control-label">' + tmp[j] + '</label><input type="hidden" class=" ' + result[i].projectid + i + '"  value=" ' + tmp[j] + '"/>&nbsp;');
+                        }
+                        tr.push('</td>');
+                        tr.push('</tr>');
+                    }
+                    $('#tbl1').append($(tr.join('')));
+                });
+    //    }
+     });
+</script>
+</html>
