@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
 
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <title>Hello, world!</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Hello, world!</title>
 </head>
 <body>
 <div id="dyntbl" class="container">
@@ -32,70 +32,70 @@
 
     $(document).ready(function() {
 
-    //   $("button").click(function(){
-    // function getProjects() {
-    $.getJSON("list/studentMatching",
-    function (result) {
-        var tr = [];
-        Object.keys(result).forEach(key => {
-           let value = result[key]
-           if (value == null || value.length == 0) {
-               return
+        // $("button").click(function(){
+        // function getProjects() {
+        $.getJSON("list/studentMatching",
+            function (result) {
+                var tr = [];
+                Object.keys(result).forEach(key => {
+                    let value = result[key]
+                    if (value == null || value.length == 0) {
+                        return
 
-           } else {
-               tr.push('<tr></tr><td bgcolor="#5f9ea0" colspan=6; align="center";>'+key+'</td></tr>');
-               let temp = "";
-               let flag = "Y";
-               Object.keys(value).forEach(key1 => {
-                   let value1 = value[key1]
-                   tr.push('<tr>');
-                   Object.keys(value1).forEach(key2 => {
+                    } else {
+                        tr.push('<tr></tr><td bgcolor="#5f9ea0" colspan=6; align="center";>'+key+'</td></tr>');
+                        let temp = "";
+                        let flag = "Y";
+                        Object.keys(value).forEach(key1 => {
+                            let value1 = value[key1]
+                            tr.push('<tr>');
+                            Object.keys(value1).forEach(key2 => {
 
-                       if (key2=="studentId") {
+                                if (key2=="studentId") {
 
-                           tr.push('<td>' + value1[key2] + '</td>');
-                       }
+                                    tr.push('<td>' + value1[key2] + '</td>');
+                                }
 
-                       if (key2=="firstName") {
-                           tr.push('<td>' + value1[key2] + '</td>');
-                       }
-                       if (key2==="lastName") {
-                           tr.push('<td>' + value1[key2] + '</td>');
-                       }
+                                if (key2=="firstName") {
+                                    tr.push('<td>' + value1[key2] + '</td>');
+                                }
+                                if (key2==="lastName") {
+                                    tr.push('<td>' + value1[key2] + '</td>');
+                                }
 
-                       if (key2==="skills") {
-                           tr.push('<td>' + value1[key2] + '</td>');
-                       }
-                       if (key2==="totalPoints") {
-                           tr.push('<td>' + value1[key2] + '</td>');
-                       }
+                                if (key2==="skills") {
+                                    tr.push('<td>' + value1[key2] + '</td>');
+                                }
+                                if (key2==="totalPoints") {
+                                    tr.push('<td>' + value1[key2] + '</td>');
+                                }
 
-                       if (key2==="weekDay") {
-                           tr.push('<td>')
-                           let value2 = value1[key2]
-                           let str=""
-                           Object.keys(value2).forEach(key3 => {
-                                let value3 = value2[key3]
-                                Object.keys(value3).forEach(key4 => {
-                                    str += value3[key4]
-                                    str += " "
-                                })
-                               str += ","
-                           });
-                           temp = str;
-                           tr.push(str.substr(0, str.length - 1));
-                           tr.push('</td>')
-                       }
-                       });
-                   tr.push('</tr>');
-               });
+                                if (key2==="weekDay") {
+                                    tr.push('<td>')
+                                    let value2 = value1[key2]
+                                    let str=""
+                                    Object.keys(value2).forEach(key3 => {
+                                        let value3 = value2[key3]
+                                        Object.keys(value3).forEach(key4 => {
+                                            str += value3[key4]
+                                            str += " "
+                                        })
+                                        str += ","
+                                    });
+                                    temp = str;
+                                    tr.push(str.substr(0, str.length - 1));
+                                    tr.push('</td>')
+                                }
+                            });
+                            tr.push('</tr>');
+                        });
 
-           }
-        });
+                    }
+                });
 
-        $('#tbl').append($(tr.join('')));
+                $('#tbl').append($(tr.join('')));
 
-        });
+            });
     });
 
 </script>
